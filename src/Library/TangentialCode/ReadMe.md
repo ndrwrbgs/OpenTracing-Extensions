@@ -1,0 +1,2 @@
+﻿Code that is not related to fulfilling the business goals of this project, but are not in an alternative (easily) consumable package today.
+Consider everything in this folder to be `TODO: Remove this/refactor this out of this project`
