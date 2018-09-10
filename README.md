@@ -14,12 +14,12 @@ void MyMethod(string a, int b, ulong c, bool d)
 {
   using (GlobalTracer.Instance
     .BuildSpan("operationName")
--    .WithTag(nameof(a), a)
--    .WithTag(nameof(b), b)
--    .WithTag(nameof(c), c)
--    .WithTag(nameof(d), d)
-+     // Automatically captures the parameter names due to how anonymous types work :-)
-+    .WithTagsFromAnonymousType(new { a, b, c, d })
+-   .WithTag(nameof(a), a)
+-   .WithTag(nameof(b), b)
+-   .WithTag(nameof(c), c)
+-   .WithTag(nameof(d), d)
++   // Automatically captures the parameter names due to how anonymous types work :-)
++   .WithTagsFromAnonymousType(new { a, b, c, d })
     .StartActive())
   {
   }
@@ -50,8 +50,8 @@ void MyMethod()
         // [nit] - Dictionary is not as efficient as an Array of KeyValuePair's, but it is a nicer syntax :)
         fields: new Dictionary<string, object>(3)
         {
--          ["memberName"] = nameof(MyMethod),
--          ["memberLineNumber"] = /* This actually isn't possible, so leaving this uncompilable */,
+-         ["memberName"] = nameof(MyMethod),
+-         ["memberLineNumber"] = /* This actually isn't possible */,
           ["someKey"] = true
         });
   }
@@ -63,17 +63,13 @@ _And its related overloads_
 
 Allows logging a single `KeyValuePair` to the `ISpan`, without having the noise of initializing an array in your log code.
 
-### Before
+### Before and After
 ```C#
 ISpan span;
-span.Log(
-  new []
-  {
-    new KeyValuePair<string, object>("myField", "myValue"),
-  });
-```
-### After
-```C#
-ISpan span;
-span.Log("myField", "myValue");
+-span.Log(
+-  new []
+-  {
+-    new KeyValuePair<string, object>("myField", "myValue"),
+-  });
++span.Log("myField", "myValue");
 ```
