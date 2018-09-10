@@ -64,7 +64,7 @@ _And its related overloads_
 Allows logging a single `KeyValuePair` to the `ISpan`, without having the noise of initializing an array in your log code.
 
 ### Before and After
-```C#
+```diff
 ISpan span;
 -span.Log(
 -  new []
