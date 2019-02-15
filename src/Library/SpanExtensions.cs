@@ -64,7 +64,12 @@
                         field
                     });
         }
-
+        
+        /// <summary>
+        /// Uses reflection over the anonymous type defined by <typeparamref name="T"/>
+        /// (via <paramref name="anonymousType"/>) to set each field of <typeparamref name="T"/>
+        /// as a tag on <paramref name="span"/> (by using <see cref="object.ToString()"/>)
+        /// </summary>
         public static ISpan SetTagsFromAnonymousType<T>(
             this ISpan span,
             T anonymousType)

@@ -13,7 +13,7 @@
     internal static class ShallowAnonymousTypeHelper
     {
         [NotNull]
-        public static ICollection<KeyValuePair<string, Func<T, string>>> GetFieldNamesAndGetters<T>()
+        public static ICollection<KeyValuePair<string, Func<T, string>>> GetFieldNamesAndToStringGetters<T>()
         {
             FieldInfo[] fields = typeof(T).GetFields();
 
@@ -21,7 +21,6 @@
                 .ToArray(
                     field => new KeyValuePair<string, Func<T, string>>(
                         field.Name,
-                        // TODO: To avoid .ToString() on potentially costly types, should offer a way to specify 'BCL only' or 'string only' types
                         contractItem => field.GetValue(contractItem)?.ToString()));
         }
     }

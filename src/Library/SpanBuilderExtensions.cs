@@ -26,7 +26,7 @@
         /// <summary>
         /// Uses reflection over the anonymous type defined by <typeparamref name="T"/>
         /// (via <paramref name="anonymousType"/>) to set each field of <typeparamref name="T"/>
-        /// as a tag on <paramref name="spanBuilder"/>.
+        /// as a tag on <paramref name="spanBuilder"/> (by using <see cref="object.ToString()"/>)
         /// </summary>
         public static ISpanBuilder WithTagsFromAnonymousType<T>(
             this ISpanBuilder spanBuilder,
