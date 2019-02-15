@@ -83,48 +83,39 @@
                 lineNumber);
 
             return span
-                // TODO: Since we know we add only 1 item, we can optimize this if inlining CreateFields
                 .Log(fields.Concat(memberFields));
         }
 
-        private static IEnumerable<KeyValuePair<string, object>> CreateFields(
+        private static KeyValuePair<string, object>[] CreateFields(
             CallerInfoLogFlags logFlags,
             string memberNameLogKey,
             string lineNumberLogKey,
             string memberName,
             int lineNumber)
         {
-            IEnumerable<KeyValuePair<string, object>> fields;
-
             switch (logFlags)
             {
                 case CallerInfoLogFlags.None:
-                    fields = Enumerable.Empty<KeyValuePair<string, object>>();
-                    break;
+                    return new KeyValuePair<string, object>[]{ };
                 case CallerInfoLogFlags.CallerMemberName:
-                    fields = new[]
+                    return new[]
                     {
                         new KeyValuePair<string, object>(memberNameLogKey, memberName),
                     };
-                    break;
                 case CallerInfoLogFlags.CallerLineNumber:
-                    fields = new[]
+                    return new[]
                     {
                         new KeyValuePair<string, object>(lineNumberLogKey, lineNumber),
                     };
-                    break;
                 case CallerInfoLogFlags.CallerMemberName | CallerInfoLogFlags.CallerLineNumber:
-                    fields = new[]
+                    return new[]
                     {
                         new KeyValuePair<string, object>(memberNameLogKey, memberName),
                         new KeyValuePair<string, object>(lineNumberLogKey, lineNumber),
                     };
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(logFlags), logFlags, null);
             }
-
-            return fields;
         }
     }
 }
