@@ -1,3 +1,5 @@
+[![NuGet](https://img.shields.io/nuget/v/OpenTracing.Contrib.Extensions.svg)](https://www.nuget.org/packages/OpenTracing.Contrib.Extensions)
+
 # OpenTracing-Extensions
 Simple extensions on top of the OpenTracing APIs.
 
