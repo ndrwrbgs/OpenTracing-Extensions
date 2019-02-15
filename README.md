@@ -8,6 +8,8 @@ Notable pieces...
 ## ISpanBuilder.WithTagsFromAnonymousType
 _This name is verbose, don't be surprised if it changes slightly :)_
 
+CAVEAT!!! Only valid to use if the user is NOT dynamically creating an unending multitude of dynamic runtime types - since we are caching. You shouldn't be doing this, I've never seen it done, but please be cognizant of this when calling this method.
+
 Allows setting tags from an anonymous type. E.g. setting arguments from a method easily.
 
 ### Before and After
