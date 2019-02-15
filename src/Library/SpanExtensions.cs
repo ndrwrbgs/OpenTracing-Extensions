@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using JetBrains.Annotations;
 
+    using OpenTracing.Contrib.Extensions.TangentialCode.Reflection;
+
     /// <summary>
     /// Extensions for <see cref="ISpan"/>, for logging a single item
     /// </summary>
@@ -61,6 +63,24 @@
                     {
                         field
                     });
+        }
+
+        public static ISpan SetTagsFromAnonymousType<T>(
+            this ISpan span,
+            T anonymousType)
+        {
+            foreach (var fieldInfo in AnonymousTypeReflectionCache<T>.Instance.FieldNamesAndGetters)
+            {
+                var fieldName = fieldInfo.Key;
+                var fieldGetter = fieldInfo.Value;
+
+                var fieldValue = fieldGetter(anonymousType);
+
+                span = span
+                    .SetTag(fieldName, fieldValue);
+            }
+
+            return span;
         }
     }
 }

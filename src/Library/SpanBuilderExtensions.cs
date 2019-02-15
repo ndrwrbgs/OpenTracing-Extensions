@@ -15,7 +15,7 @@
         /// options like <see cref="SpanExtensions.LogMemberInfo"/>.
         /// </remarks>
         public static ISpanBuilder WithCallerMemberNameTag(
-            ISpanBuilder spanBuilder,
+            this ISpanBuilder spanBuilder,
             string tagName = Constants.CallerMemberNameTagName,
             [CallerMemberName] string callerMemberName = null)
         {
@@ -29,7 +29,7 @@
         /// as a tag on <paramref name="spanBuilder"/>.
         /// </summary>
         public static ISpanBuilder WithTagsFromAnonymousType<T>(
-            ISpanBuilder spanBuilder,
+            this ISpanBuilder spanBuilder,
             T anonymousType)
         {
             foreach (var fieldInfo in AnonymousTypeReflectionCache<T>.Instance.FieldNamesAndGetters)
