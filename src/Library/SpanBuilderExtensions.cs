@@ -6,7 +6,7 @@
     using OpenTracing.Contrib.Extensions.TangentialCode.Reflection;
 
     [PublicAPI]
-    public static class SpanBuilderExtensions
+    public static partial class SpanBuilderExtensions
     {
         /// <remarks>
         /// <see cref="CallerLineNumberAttribute"/> is explicitly NOT used, since that can change
