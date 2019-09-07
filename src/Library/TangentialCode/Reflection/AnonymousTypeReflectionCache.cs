@@ -16,7 +16,7 @@
     {
         private AnonymousTypeReflectionCache()
         {
-            this.FieldNamesAndGetters = ShallowAnonymousTypeHelper.GetFieldNamesAndToStringGetters<T>().ToArray();
+            this.FieldNamesAndGetters = ShallowAnonymousTypeHelper.GetFieldAndPropertyNamesAndToStringGetters<T>().ToArray();
         }
 
         [NotNull]
